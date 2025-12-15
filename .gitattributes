@@ -1,0 +1,7 @@
+*.js text eol=lf
+*.json text eol=lf
+
+node_modules/
+.env
+.DS_Store
+
