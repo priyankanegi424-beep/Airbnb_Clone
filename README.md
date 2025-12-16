@@ -24,7 +24,7 @@
 
 ## Project Overview
 
-Excited to share my journey of developing a feature-rich full-stack web application inspired by Airbnb. The project is built using MongoDB, Express.js, and Node.js.
+Excited to share my journey of developing a feature-rich full-stack web application inspired by . The project is built using MongoDB, Express.js, and Node.js.
 
 ## Technologies & Packages Used
 
@@ -105,7 +105,7 @@ LinkedIn : https://www.linkedin.com/in/shriniwas-maurya
 
 ## Thank You
 
-Thank you for exploring Airbnb! Your feedback is valuable. If you have any suggestions or thoughts, feel free to share them with us. 😊
+Thank you for exploring Stayvel! Your feedback is valuable. If you have any suggestions or thoughts, feel free to share them with us. 😊
 
 ---
 ### Thanks for visit... 😊😊😊
