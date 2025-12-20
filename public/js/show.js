@@ -1,81 +1,89 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const images = document.querySelectorAll(".slider-image");
-  const thumbs = document.querySelectorAll(".thumbnail");
-  const nextBtn = document.getElementById("nextBtn");
-  const prevBtn = document.getElementById("prevBtn");
+  const slides = document.querySelectorAll(".slider-image");
+  const prevBtn = document.querySelector(".left-btn");
+  const nextBtn = document.querySelector(".right-btn");
+  const sliderBox = document.querySelector(".dozzy-image-box");
+  const slider = document.querySelector(".image-slider");
 
   let currentIndex = 0;
+  let autoSlideInterval;
 
-  function updateSlider(index) {
-    images.forEach(img => img.classList.remove("active"));
-    thumbs.forEach(t => t.classList.remove("thumb-active"));
-
-    images[index].classList.add("active");
-    thumbs[index].classList.add("thumb-active");
-    currentIndex = index;
+  /* ================= COMMON FUNCTIONS ================= */
+  function showSlide(index) {
+    slides.forEach((img, i) => {
+      img.classList.toggle("active", i === index);
+    });
+    updateDots(index);
   }
 
-  thumbs.forEach(thumb => {
-    thumb.addEventListener("click", () => {
-      updateSlider(Number(thumb.dataset.index));
+  function nextSlide() {
+    currentIndex = (currentIndex + 1) % slides.length;
+    showSlide(currentIndex);
+  }
+
+  function prevSlide() {
+    currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+    showSlide(currentIndex);
+  }
+
+  function startAutoSlide() {
+    autoSlideInterval = setInterval(nextSlide, 4000);
+  }
+
+  function stopAutoSlide() {
+    clearInterval(autoSlideInterval);
+  }
+
+  /* ================= DESKTOP (UNCHANGED) ================= */
+  if (prevBtn && nextBtn) {
+    prevBtn.addEventListener("click", () => {
+      prevSlide();
     });
+
+    nextBtn.addEventListener("click", () => {
+      nextSlide();
+    });
+  }
+
+  /* ================= MOBILE DOTS ================= */
+  const dotsContainer = document.createElement("div");
+  dotsContainer.className = "slider-dots";
+
+  slides.forEach((_, i) => {
+    const dot = document.createElement("span");
+    if (i === 0) dot.classList.add("active");
+    dotsContainer.appendChild(dot);
   });
 
-  if (nextBtn) {
-    nextBtn.onclick = () =>
-      updateSlider((currentIndex + 1) % images.length);
+  sliderBox.appendChild(dotsContainer);
+
+  const dots = dotsContainer.querySelectorAll("span");
+
+  function updateDots(index) {
+    dots.forEach((dot, i) => {
+      dot.classList.toggle("active", i === index);
+    });
   }
 
-  if (prevBtn) {
-    prevBtn.onclick = () =>
-      updateSlider((currentIndex - 1 + images.length) % images.length);
-  }
+  /* ================= MOBILE SWIPE ================= */
+  let startX = 0;
+
+  slider.addEventListener("touchstart", e => {
+    startX = e.touches[0].clientX;
+    stopAutoSlide();
+  });
+
+  slider.addEventListener("touchend", e => {
+    const endX = e.changedTouches[0].clientX;
+    const diff = startX - endX;
+
+    if (diff > 50) nextSlide();
+    if (diff < -50) prevSlide();
+
+    startAutoSlide();
+  });
+
+  /* ================= INIT ================= */
+  showSlide(0);
+  startAutoSlide();
 });
-
-
-
-
-//for mobile navbar toggle
-// BOOKING DATE CALCULATION
-const checkIn = document.getElementById("checkIn");
-const checkOut = document.getElementById("checkOut");
-const nightCountEl = document.getElementById("nightCount");
-const totalPriceEl = document.getElementById("totalPrice");
-
-if (checkIn && checkOut) {
-  function calculatePrice() {
-    const start = new Date(checkIn.value);
-    const end = new Date(checkOut.value);
-
-    if (start && end && end > start) {
-      const nights = Math.ceil(
-        (end - start) / (1000 * 60 * 60 * 24)
-      );
-
-      const pricePerNight = Number(
-        document.querySelector(".price-box").innerText.replace(/\D/g, "")
-      );
-
-      nightCountEl.innerText = nights;
-      totalPriceEl.innerText = nights * pricePerNight;
-    } else {
-      nightCountEl.innerText = 0;
-      totalPriceEl.innerText = 0;
-    }
-  }
-
-  checkIn.addEventListener("change", calculatePrice);
-  checkOut.addEventListener("change", calculatePrice);
-}
-
-
-
-//auto scroll
-const images = document.querySelectorAll(".slider-image");
-let index = 0;
-
-setInterval(() => {
-  images.forEach(img => img.classList.remove("active"));
-  index = (index + 1) % images.length;
-  images[index].classList.add("active");
-}, 3000);

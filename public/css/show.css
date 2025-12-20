@@ -1178,5 +1178,260 @@ body {
     margin-top: 22px;
   }
 }
+/* ===== MAIN BLUE BORDER BOX (LIKE DOZZY) ===== */
+.dozzy-main-box {
+  border: 4px solid #3f66ff;
+  border-radius: 12px;
+  padding: 24px;
+}
 
 
+/* ===== SLIDER BEHAVIOR ===== */
+.image-slider {
+  overflow: hidden;
+  touch-action: none;   /* disable swipe */
+}
+
+.slider-image {
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+/* ===== SLIDER ARROWS ===== */
+.slider-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #fff;
+  border: none;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  font-size: 20px;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.left-btn { left: 12px; }
+.right-btn { right: 12px; }
+
+/* ===== BLUE CONTAINER ===== */
+.dozzy-main-box {
+  border: 2px solid #3f66ff;
+  border-radius: 12px;
+  padding: 24px;
+}
+/* ===== IMAGE SLIDER CONTAINER ===== */
+.dozzy-image-box {
+  position: relative;
+  overflow: hidden;
+  border-radius: 14px;
+}
+
+/* Dark overlay on hover */
+.dozzy-image-box::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.25);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 0;
+}
+
+.dozzy-image-box:hover::after {
+  opacity: 0;
+}
+
+/* ===== SLIDER IMAGES ===== */
+.image-slider {
+  position: relative;
+}
+
+.slider-image {
+  width: 100%;
+  height: 420px;
+  object-fit: cover;
+  display: none;
+}
+
+.slider-image.active {
+  display: block;
+}
+
+/* ===== ARROW BUTTONS ===== */
+.slider-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255,255,255,0.9);
+  color: #000;
+  font-size: 20px;
+  cursor: pointer;
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.left-btn {
+  left: 12px;
+}
+
+.right-btn {
+  right: 12px;
+}
+
+/* Show arrows on hover */
+.dozzy-image-box:hover .slider-btn {
+  opacity: 1;
+  font-size: 0.8rem;
+    opacity: 1;
+    background-color: whitesmoke;
+    height: 25px;
+    width: 25px;
+}
+
+/* Hover effect on arrows */
+.slider-btn:hover {
+  background: #fff;
+  transform: translateY(-50%) scale(1.08);
+}
+
+/* ===== MOBILE FIX ===== */
+@media (max-width: 768px) {
+  .slider-image {
+    height: 260px;
+  }
+
+  .slider-btn {
+    opacity: 1; /* always visible on mobile */
+  }
+
+  .dozzy-image-box::after {
+    opacity: 0; /* no dark overlay on mobile */
+  }
+}
+/* FIX BLACK GAP UNDER IMAGE */
+.dozzy-image-box {
+  background: transparent; /* remove black */
+}
+
+.image-slider {
+  background: transparent;
+}
+
+.slider-image {
+  width: 100%;
+  height: 100%;
+  min-height: 420px;
+  object-fit: cover; /* fill container */
+  background: transparent;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .slider-image {
+    min-height: 260px;
+  }
+}
+
+
+@media (max-width: 768px) {
+  .slider-zone {
+    display: none;
+  }
+}
+
+.slider-dots {
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 6px;
+  z-index: 5;
+}
+
+.slider-dots span {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.5);
+}
+
+.slider-dots span.active {
+  background: #2563eb; /* blue */
+}
+
+
+.add-people-text {
+  line-height: 1.4;
+}
+
+@media (max-width: 576px) {
+  .add-people-text {
+    font-size: 14px;
+  }
+
+  .add-people-text span {
+    display: block;
+  }
+}
+/* Add People text – professional Dozzy style */
+.add-people-box h5 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #2563eb; /* blue heading */
+  margin-bottom: 6px;
+}
+
+.add-people-box p {
+  font-size: 14px;
+  color: #374151; /* soft dark gray */
+  line-height: 1.6;
+}
+
+.add-people-box p strong {
+  color: #111827; /* darker emphasis */
+  font-weight: 600;
+}
+
+/* ₹400 highlight */
+.add-people-box p strong:last-child {
+  color: #2563eb;
+}
+
+
+/* Visibility */
+.desktop-only { display: block; }
+.mobile-only { display: none; }
+
+@media (max-width: 768px) {
+  .desktop-only { display: none; }
+  .mobile-only { display: flex; }
+}
+
+/* Dots */
+.slider-dots {
+  position: absolute;
+  bottom: 12px;
+  width: 100%;
+  justify-content: center;
+  gap: 8px;
+}
+
+.slider-dots .dot {
+  width: 8px;
+  height: 8px;
+  background: #bbb;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.slider-dots .dot.active {
+  background: #2563eb;
+}
