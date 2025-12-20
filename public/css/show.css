@@ -1142,4 +1142,41 @@ body {
     padding: 10px;
   }
 }
+/* ===== MOBILE GAP FIX ===== */
+@media (max-width: 576px) {
+
+  /* Space after WhatsApp / Call buttons */
+  .contact-box {
+    margin-bottom: 28px; /* 👈 adds gap */
+  }
+
+  /* Space before Our Amenities section */
+  .section-wrapper:first-of-type {
+    margin-top: 20px; /* 👈 clean top gap */
+  }
+}
+
+/* ===== OUR AMENITIES TOP GAP FIX (ALL SCREENS) ===== */
+
+/* Gap above amenities section */
+.section-wrapper {
+  padding-top: 24px;
+}
+
+/* Extra gap between heading and cards */
+.section-wrapper .amenities-grid {
+  margin-top: 28px;
+}
+
+/* Mobile fine-tune */
+@media (max-width: 576px) {
+  .section-wrapper {
+    padding-top: 20px;
+  }
+
+  .section-wrapper .amenities-grid {
+    margin-top: 22px;
+  }
+}
+
 
