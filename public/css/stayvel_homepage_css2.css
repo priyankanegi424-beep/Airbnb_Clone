@@ -1,76 +1,95 @@
-.stayvel-container{
-  padding:30px 40px;
-}
-.stayvel-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(320px,1fr));
-  gap:24px;
-}
-.stayvel-card{
-  background:#fff;
-  border-radius:14px;
-  box-shadow:0 8px 22px rgba(0,0,0,.08);
-  overflow:hidden;
-}
-.stayvel-image-wrap{
-  position:relative;
-  height:260px;
-  display:block;
-}
-.stayvel-image-wrap img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-}
-.heart{
-  position:absolute;
-  top:12px;
-  right:12px;
-  width:28px;
-  cursor:pointer;
-}
-.heart-r{z-index:3}
-.heart-b{z-index:4}
+/* ===============================
+   FORCE FULL WIDTH (BOOTSTRAP FIX)
+   =============================== */
 
-.stayvel-overlay{
-  position:absolute;
-  bottom:0;
-  width:100%;
-  padding:14px;
-  color:#fff;
-  background:linear-gradient(to top,rgba(0,0,0,.8),transparent);
-}
-.stayvel-offer{
-  font-size:12px;
-  font-weight:600;
-}
-.stayvel-title{
-  font-size:16px;
-  font-weight:700;
-}
-.stayvel-price{
-  font-size:14px;
-  margin-top:4px;
+/* BREAK OUT OF BOOTSTRAP CONTAINER */
+.stayvel-full-width {
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
 }
 
-.stayvel-actions{
-  display:flex;
-  gap:10px;
-  padding:12px;
-}
-.stayvel-actions .btn{
-  flex:1;
-  padding:10px;
-  text-align:center;
-  color:#fff;
-  border-radius:8px;
-  font-weight:600;
-  text-decoration:none;
-}
-.whatsapp{background:#25D366}
-.call{background:#4e6cef}
+/* GRID */
+.stayvel-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 24px;
 
-@media(max-width:768px){
-  .stayvel-container{padding:15px}
-  .stayvel-image-wrap{height:220px}
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* CARD */
+.stayvel-card {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 8px 22px rgba(0,0,0,0.08);
+  overflow: hidden;
+}
+
+/* IMAGE */
+.stayvel-img-wrap {
+  position: relative;
+  height: 220px;
+}
+
+.stayvel-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* OVERLAY */
+.stayvel-overlay {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 12px;
+  color: #fff;
+  background: linear-gradient(
+    to top,
+    rgba(0,0,0,0.75),
+    transparent
+  );
+}
+
+.stayvel-title {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.stayvel-price {
+  font-size: 14px;
+}
+
+/* BUTTONS */
+.stayvel-actions {
+  display: flex;
+  gap: 10px;
+  padding: 12px;
+}
+
+.stayvel-btn {
+  flex: 1;
+  padding: 10px;
+  text-align: center;
+  border-radius: 10px;
+  font-weight: 600;
+  color: #fff;
+  text-decoration: none;
+}
+
+.stayvel-btn.whatsapp { background: #25D366; }
+.stayvel-btn.call { background: #4e6cef; }
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .stayvel-grid {
+    grid-template-columns: 1fr;
+    padding: 15px;
+  }
+
+  .stayvel-img-wrap {
+    height: 200px;
+  }
 }

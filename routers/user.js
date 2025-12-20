@@ -159,7 +159,26 @@ router.get("/auth/google/callback", (req, res, next) => {
     }
 
     // 🔹 CASE 3: Signup flow → AUTO REGISTER + LOGIN
-    const profile = info.googleProfile;
+    passport.authenticate("google", (err, user, profile) => {
+    if (err) {
+        console.error("Google Auth Error:", err);
+        return res.redirect("/login");
+    }
+
+    if (!profile) {
+        console.error("Google profile missing");
+        return res.redirect("/login");
+    }
+
+    req.logIn(user, (err) => {
+        if (err) {
+            console.error("Login error:", err);
+            return res.redirect("/login");
+        }
+        return res.redirect("/");
+    });
+});
+
 
     const newUser = new User({
       fName: profile.fName,
