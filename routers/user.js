@@ -28,6 +28,7 @@ router.get(
 );
 
 // ================= GOOGLE CALLBACK =================
+// ================= GOOGLE CALLBACK =================
 router.get(
   "/auth/google/callback",
   passport.authenticate("google", {
@@ -35,10 +36,20 @@ router.get(
     failureFlash: true,
   }),
   (req, res) => {
-    req.flash("success", "Logged in successfully");
+    const flow = req.session.googleFlow;
+    delete req.session.googleFlow;
+
+    if (flow === "signup") {
+      req.flash("success", "Account created & logged in");
+    } else {
+      req.flash("success", "Logged in successfully");
+    }
+
     res.redirect("/listings");
   }
 );
+
+
 
 
 // ================= LOGOUT =================
