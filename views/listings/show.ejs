@@ -7,34 +7,34 @@
   <div class="dozzy-main-box">
     <div class="row g-4">
 
-      <!-- LEFT : IMAGE SLIDER -->
+      <!-- LEFT : IMAGE AUTO SLIDER -->
       <div class="col-md-6">
         <div class="dozzy-image-box">
 
           <!-- IMAGE SLIDER -->
-          <div class="image-slider" id="imageSlider">
+          <div class="image-slider">
             <% if (listing.images && listing.images.length > 0) { %>
-              <% listing.images.forEach((img, index) => { %>
+              <% for (var i = 0; i < listing.images.length; i++) { %>
                 <img
-                  src="<%= img.url %>"
-                  class="slider-image <%= index === 0 ? 'active' : '' %>"
-                  data-index="<%= index %>">
-              <% }) %>
+                  src="<%= listing.images[i].url %>"
+                  class="slider-image <%= i === 0 ? 'active' : '' %>"
+                  data-index="<%= i %>">
+              <% } %>
             <% } else { %>
               <img src="/Icon/navbar-icon-user.png" class="slider-image active">
             <% } %>
           </div>
 
-          <!-- DESKTOP ARROWS (ONLY DESKTOP) -->
-          <button class="slider-btn left-btn desktop-only">&#10094;</button>
-          <button class="slider-btn right-btn desktop-only">&#10095;</button>
+          <!-- DESKTOP ARROWS (UNCHANGED) -->
+          <button class="slider-btn left-btn">&#10094;</button>
+          <button class="slider-btn right-btn">&#10095;</button>
 
-          <!-- MOBILE DOTS -->
-          <div class="slider-dots mobile-only">
-            <% if (listing.images) { %>
-              <% listing.images.forEach((_, i) => { %>
+          <!-- 🔴 MOBILE DOTS (NEW – DO NOT REMOVE) -->
+          <div class="slider-dots">
+            <% if (listing.images && listing.images.length > 0) { %>
+              <% for (var i = 0; i < listing.images.length; i++) { %>
                 <span class="dot <%= i === 0 ? 'active' : '' %>" data-index="<%= i %>"></span>
-              <% }) %>
+              <% } %>
             <% } %>
           </div>
 
@@ -45,27 +45,44 @@
       <div class="col-md-6">
         <h1 class="dozzy-title"><%= listing.title %></h1>
 
-        <!-- PRICE -->
-        <div class="price-plan-box">
-          <div class="plan-price">₹ <%= listing.price %> / Night</div>
-          <div class="plan-time">
-            <div><span>Check-in</span><br><strong>9 AM</strong></div>
-            <div><span>Check-out</span><br><strong>8 PM</strong></div>
-          </div>
+        <!-- PRICE PLANS -->
+        <div class="price-plan-wrapper">
+          <% if (listing.plans && listing.plans.length > 0) { %>
+            <% for (var j = 0; j < listing.plans.length; j++) { %>
+              <div class="price-plan-box">
+                <div class="plan-price">
+                  ₹ <%= listing.plans[j].price %> / <%= listing.plans[j].hours %> Hrs
+                </div>
+                <div class="plan-time">
+                  <div>
+                    <span>Check-in</span><br>
+                    <strong><%= listing.plans[j].checkIn %></strong>
+                  </div>
+                  <div>
+                    <span>Check-out</span><br>
+                    <strong><%= listing.plans[j].checkOut %></strong>
+                  </div>
+                </div>
+              </div>
+            <% } %>
+          <% } else { %>
+            <div class="price-plan-box">
+              <div class="plan-price">₹ <%= listing.price %> / Night</div>
+              <div class="plan-time">
+                <div><span>Check-in</span><br><strong>9 AM</strong></div>
+                <div><span>Check-out</span><br><strong>8 PM</strong></div>
+              </div>
+            </div>
+          <% } %>
         </div>
 
         <!-- ADD PEOPLE -->
         <div class="add-people-box">
           <h5>Add People</h5>
-          <p class="add-people-text">
-  <span class="free">
-    Upto <strong><%= listing.freePeople || 8 %></strong> People is Free
-  </span>
-  <span class="extra">
-    After that <strong>₹<%= listing.extraPersonCharge || 400 %></strong>/Person Extra
-  </span>
-</p>
-
+          <p>
+            Upto <strong><%= listing.freePeople || 8 %></strong> People is Free,
+            After that <strong>₹<%= listing.extraPersonCharge || 400 %></strong>/Person Extra
+          </p>
         </div>
 
         <!-- FEATURES -->
@@ -80,11 +97,66 @@
           <a href="https://wa.me/<%= listing.whatsapp || '' %>" class="btn whatsapp-btn">WhatsApp</a>
           <a href="tel:<%= listing.phone || '' %>" class="btn call-btn">Call Us</a>
         </div>
-      </div>
 
+      </div>
     </div>
   </div>
 </div>
 
-<!-- ================= REST SECTIONS UNCHANGED ================= -->
+<!-- ================= OUR AMENITIES ================= -->
+<div class="section-wrapper">
+  <div class="container">
+    <h2 class="section-heading">Our Amenities</h2>
+
+    <div class="amenities-grid dozzy-amenities">
+      <div class="amenity-card"><i class="fa-solid fa-snowflake"></i><span>AC</span></div>
+      <div class="amenity-card"><i class="fa-solid fa-wifi"></i><span>WiFi</span></div>
+      <div class="amenity-card"><i class="fa-solid fa-box"></i><span>Fridge</span></div>
+      <div class="amenity-card"><i class="fa-solid fa-person-swimming"></i><span>Swimming Pool</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ================= PROPERTY RULES ================= -->
+<div class="section-wrapper">
+  <div class="container">
+    <h2 class="section-heading">Property Rules</h2>
+    <ul class="rules-list">
+      <li>Check in after 1pm | Check Out before 12pm</li>
+      <li>Alcohol Consumption Is Allowed</li>
+      <li>Pets are allowed</li>
+      <li>Guests are responsible for their safety and belongings</li>
+      <li>Cooking and Barbequee available on demand</li>
+      <li>Aadhar photo is compulsory for each & every person</li>
+      <li>No delay in Checkout We have Another Booking</li>
+      <li>Any Damage Customer has to Pay</li>
+      <li>Drugs/Hookah Not Allowed</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ================= ADDITIONAL CHARGES ================= -->
+<div class="section-wrapper">
+  <div class="container">
+    <h2 class="section-heading">Additional Charges</h2>
+
+    <table class="charges-table">
+      <tr><td>Self Cooking Access</td><td>₹ 500</td></tr>
+      <tr><td>Barbecue Setup</td><td>₹ 500</td></tr>
+      <tr><td>Cleaning Charges</td><td>₹ 500</td></tr>
+      <tr><td>Extra Per Person</td><td>₹ <%= listing.extraPersonCharge || 400 %></td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- ================= DESCRIPTION ================= -->
+<div class="section-wrapper">
+  <div class="container">
+    <h2 class="section-heading">Description</h2>
+    <div class="description-box">
+      <p><%= listing.description %></p>
+    </div>
+  </div>
+</div>
+
 <script src="/js/show.js"></script>
