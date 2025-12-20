@@ -1,52 +1,62 @@
 const express = require("express");
 const router = express.Router();
 
-const wrapAsync = require("../utils/wrapAsync.js");
-const { validateListing, isLoggedIn, isOwner } = require("../middleware.js");
+const listingController = require("../controllers/listings");
+const wrapAsync = require("../utils/wrapAsync");
 
-const listingController = require("../controllers/listings.js"); //all backend code--------
+const { isLoggedIn, isOwner } = require("../middleware");
+const multer = require("multer");
+const { storage } = require("../cloudConfig");
 
-const multer = require("multer"); //install multer package in npm || multipart/form-data type receive and paras
-// const upload = multer({ dest: 'uploads/' })  //uploads folder me save karega
-const { storage } = require("../cloudConfig.js");
 const upload = multer({ storage });
 
-// Router.route----------------------------------
-router.get("/filter/:id", wrapAsync(listingController.filter)); //Filter Route-----------------
+/* ===================== INDEX ===================== */
+router.get("/", wrapAsync(listingController.index));
 
-router.get("/filterbtn", listingController.filterbtn); //FilterButton Route-----------------
+/* ===================== NEW LISTING ===================== */
+router.get("/new", isLoggedIn, listingController.renderNewForm);
 
-router.get("/search", wrapAsync(listingController.search)); //SEARCH Route-------------
+/* ===================== CREATE LISTING ===================== */
+router.post(
+  "/",
+  isLoggedIn,
+  upload.array("listing[images]", 20),
+  wrapAsync(listingController.createListing)
+);
 
-router
-  .route("/")
-  .get(wrapAsync(listingController.index)) //Index Route----------
-  .post(
-    isLoggedIn,
-    upload.single("listing[image]"),
-    validateListing,
-    wrapAsync(listingController.createListing)
-  ); //CREATE (New & Create Route)-----------
+/* ===================== FILTER ===================== */
+router.get("/filterbtn", listingController.filterbtn);
+router.get("/filter/:id", wrapAsync(listingController.filter));
 
-router.get("/new", isLoggedIn, listingController.renderNewForm); //CREATE (New & Create Route)-----------
+/* ===================== SEARCH ===================== */
+router.get("/search", wrapAsync(listingController.search));
 
-router
-  .route("/:id")
-  .get(wrapAsync(listingController.showListing)) //READ (Show Route)------------
-  .put(
-    isLoggedIn,
-    isOwner,
-    upload.single("listing[image]"),
-    validateListing,
-    wrapAsync(listingController.updateListing)
-  ) //UPDATE (Edit & Update Route)-----------------
-  .delete(isLoggedIn, isOwner, wrapAsync(listingController.destroyListing)); //DELETE (Delete Route)-----------
+/* ===================== SHOW LISTING ===================== */
+router.get("/:id", wrapAsync(listingController.showListing));
 
+/* ===================== EDIT LISTING ===================== */
 router.get(
   "/:id/edit",
   isLoggedIn,
   isOwner,
   wrapAsync(listingController.renderEditForm)
-); //UPDATE (Edit & Update Route)-----------------
+);
 
-module.exports = router; //export---app.js---------------
+/* ===================== UPDATE LISTING ===================== */
+router.put(
+  "/:id",
+  isLoggedIn,
+  isOwner,
+  upload.array("listing[images]", 20),
+  wrapAsync(listingController.updateListing)
+);
+
+/* ===================== DELETE LISTING ===================== */
+router.delete(
+  "/:id",
+  isLoggedIn,
+  isOwner,
+  wrapAsync(listingController.destroyListing)
+);
+
+module.exports = router;

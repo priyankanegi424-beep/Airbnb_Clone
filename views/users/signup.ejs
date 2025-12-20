@@ -13,6 +13,23 @@
 
                 <form action="/signup" method="post" class="needs-validation" novalidate>
 
+                    <a href="/auth/google/signup" class="btn btn-danger w-100 mb-3">
+                        <i class="fa-brands fa-google"></i> Continue with Google
+                    </a>
+                    <!-- Verify via OTP button -->
+                    <hr>
+                    <button id="mobileBtn" class="btn btn-outline-dark w-100 mb-2">
+                        📱 Continue with Mobile
+                    </button>
+
+                    <div id="mobileBox" style="display:none">
+                        <input type="text" id="mobile" placeholder="Enter mobile number" class="form-control mb-2">
+                        <button onclick="sendOtp()" class="btn btn-primary w-100">Send OTP</button>
+
+                        <input type="text" id="otp" placeholder="Enter OTP" class="form-control mt-2">
+                        <button onclick="verifyOtp()" class="btn btn-success w-100 mt-2">Verify OTP</button>
+                    </div>
+
                     <div class="mb-3">
                         <label for="fName" class="form-label">First Name</label>
                         <input id="fName" type="text" placeholder="Enter First Name" name="fName"
@@ -65,4 +82,7 @@
                 </form>
             </div>
         </div>
+         <script type="module" src="/js/firebase.js"></script>
+<script src="/js/mobile-auth.js"></script>
+
     </body>

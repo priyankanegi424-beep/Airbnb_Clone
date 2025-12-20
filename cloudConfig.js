@@ -4,15 +4,15 @@ const { CloudinaryStorage } = require("multer-storage-cloudinary");
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
   api_key: process.env.CLOUDINARY_KEY,
-  api_secret: process.env.CLOUDINARY_SECRET,
+  api_secret: process.env.CLOUDINARY_SECRET
 });
 
 const storage = new CloudinaryStorage({
-  cloudinary: cloudinary,
+  cloudinary,
   params: {
-    folder: "wanderlust_DEV",
-    allowerdFormats: ["png", "jpg", "jpeg"],
-  },
+    folder: "Stayvel_Listings",
+    allowedFormats: ["jpeg", "png", "jpg"]
+  }
 });
 
 module.exports = { cloudinary, storage };

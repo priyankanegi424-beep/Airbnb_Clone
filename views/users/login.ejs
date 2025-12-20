@@ -10,6 +10,41 @@
 
                 <h2>LogIn on Stayvel</h2>
                 <h4 class="mt-2 mb-3">Don't have an account? <a href="/signup">Sign Up</a></h4>
+                <!-- Google button  -->
+                <a href="/auth/google/login" class="btn btn-danger w-100 mb-3">
+                    <i class="fa-brands fa-google"></i> Continue with Google
+                </a>
+
+                <!-- Verify via OTP button -->
+                <hr>
+                <button type="button" class="btn btn-outline-dark w-100" onclick="showMobileBox()">
+                    📱 Continue with Mobile
+                </button>
+
+
+                <div id="mobileBox" style="display:none">
+                    <input id="mobile" class="form-control mb-2" placeholder="Enter mobile number">
+                    <button type="button" class="btn btn-primary w-100" onclick="sendOtp()">
+                        Send OTP
+                    </button>
+
+
+                    <input id="otp" class="form-control mt-2" placeholder="Enter OTP">
+                    <button type="button" class="btn btn-success w-100 mt-2" onclick="verifyOtp()">
+                        Verify OTP
+                    </button>
+                </div>
+
+                <div id="recaptcha-container"></div>
+
+
+
+                <script type="module" src="/js/firebase.js"></script>
+                <script src="/js/mobile-auth.js"></script>
+
+
+
+
 
                 <form action="/login" method="post" class="needs-validation" novalidate>
                     <div class="mb-3">

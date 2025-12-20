@@ -9,10 +9,13 @@ const listingSchema = new Schema({
     unique: true,
   },
   description: String,
-  image: {
+  images: [
+  {
     url: String,
-    filename: String,
-  },
+    filename: String
+  }
+],
+
   price: Number,
   location: String,
   country: String,
@@ -40,6 +43,28 @@ const listingSchema = new Schema({
   category: {
     type: [String],
   },
+  plans: [
+  {
+    price: Number,
+    hours: Number,
+    checkIn: String,
+    checkOut: String
+  }
+],
+
+freePeople: {
+  type: Number,
+  default: 8
+},
+
+extraPersonCharge: {
+  type: Number,
+  default: 400
+},
+
+phone: String,
+whatsapp: String
+
 });
 
 // Define post middleware to delete all reviews in listing
