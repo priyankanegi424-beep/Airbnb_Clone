@@ -24,13 +24,13 @@ const reviewRouter = require("./routers/review");
 const userRouter = require("./routers/user");
 const profileRouter = require("./routers/profile");
 
-// ================= DB CONNECT =================
+// ================= DB =================
 mongoose
   .connect(process.env.ATLASDB_URL)
   .then(() => console.log("✅ Connected to MongoDB"))
-  .catch((err) => console.error(err));
+  .catch(console.error);
 
-// ================= VIEW ENGINE =================
+// ================= VIEW =================
 app.engine("ejs", ejsMate);
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
@@ -40,24 +40,18 @@ app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
 app.use(express.static(path.join(__dirname, "public")));
 
-// ================= SESSION STORE =================
+// ================= SESSION =================
 const store = MongoStore.create({
   mongoUrl: process.env.ATLASDB_URL,
-  crypto: {
-    secret: process.env.SECRET,
-  },
+  crypto: { secret: process.env.SECRET },
   touchAfter: 24 * 3600,
-});
-
-store.on("error", (e) => {
-  console.log("❌ SESSION STORE ERROR", e);
 });
 
 const sessionOptions = {
   store,
   secret: process.env.SECRET,
   resave: false,
-  saveUninitialized: false, // 🔥 IMPORTANT FIX
+  saveUninitialized: false,
   cookie: {
     maxAge: 7 * 24 * 60 * 60 * 1000,
     httpOnly: true,
@@ -77,22 +71,32 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-// ================= GOOGLE AUTH =================
+// ================= GOOGLE STRATEGY =================
 passport.use(
   new GoogleStrategy(
     {
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL: "/auth/google/callback",
+      callbackURL: process.env.GOOGLE_CALLBACK_URL,
     },
     async (accessToken, refreshToken, profile, done) => {
       try {
-        const email = profile.emails[0].value;
+        const email = profile.emails?.[0]?.value;
+        if (!email) return done(null, false);
 
         let user = await User.findOne({ email });
 
         if (!user) {
-          return done(null, false);
+          user = new User({
+            username: email,
+            email,
+            fName: profile.name.givenName,
+            lName: profile.name.familyName,
+            googleId: profile.id,
+            profileImage: profile.photos?.[0]?.value,
+          });
+
+          await User.register(user, Math.random().toString(36).slice(-8));
         }
 
         return done(null, user);
@@ -117,18 +121,16 @@ app.use("/profile", profileRouter);
 app.use("/listings", listingRouter);
 app.use("/listings/:id/reviews", reviewRouter);
 
-// ================= 404 =================
+// ================= ERROR =================
 app.all("*", (req, res, next) => {
   next(new ExpressError(404, "Page Not Found"));
 });
 
-// ================= ERROR HANDLER =================
 app.use((err, req, res, next) => {
   const { statusCode = 500, message = "Something went wrong" } = err;
   res.status(statusCode).render("listings/error", { message });
 });
 
-// ================= SERVER =================
 app.listen(8080, () => {
   console.log("🚀 Server running on port 8080");
 });
