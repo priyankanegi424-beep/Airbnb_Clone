@@ -1069,4 +1069,77 @@ body {
 .charges-table {
   margin-bottom: 0;
 }
+/* ================= MOBILE FIXES ================= */
+@media (max-width: 576px) {
+
+  /* Section headings */
+  .section-heading {
+    font-size: 26px;
+    margin-bottom: 18px;
+    padding-left: 14px;
+  }
+
+  .section-heading::before {
+    height: 30px;
+    top: 4px;
+  }
+
+  /* Amenities grid */
+  .amenities-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+
+  .amenity-card {
+    padding: 22px 8px;
+  }
+
+  .amenity-card i {
+    font-size: 32px;
+    margin-bottom: 10px;
+  }
+
+  .amenity-card span {
+    font-size: 14px;
+  }
+
+  /* Property rules */
+  .rules-list {
+    font-size: 15px;
+    line-height: 1.6;
+    padding-left: 18px;
+  }
+
+  /* Additional charges table */
+  .charges-table {
+    font-size: 14px;
+  }
+
+  .charges-table td {
+    padding: 10px 12px;
+  }
+
+  /* Description */
+  .description-box p {
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  /* Reduce section spacing */
+  .section-wrapper {
+    margin-bottom: 32px;
+  }
+
+  /* Contact buttons */
+  .contact-box {
+    display: flex;
+    gap: 10px;
+  }
+
+  .contact-box .btn {
+    flex: 1;
+    font-size: 14px;
+    padding: 10px;
+  }
+}
 
