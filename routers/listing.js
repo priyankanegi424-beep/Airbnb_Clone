@@ -4,19 +4,23 @@ const router = express.Router();
 const listingController = require("../controllers/listings");
 const wrapAsync = require("../utils/wrapAsync");
 
+// middleware
 const { isLoggedIn, isOwner } = require("../middleware");
+
+// multer + cloudinary
 const multer = require("multer");
 const { storage } = require("../cloudConfig");
-
 const upload = multer({ storage });
 
 /* ===================== INDEX ===================== */
 router.get("/", wrapAsync(listingController.index));
 
 /* ===================== NEW LISTING ===================== */
+/* 🔐 LOGIN REQUIRED */
 router.get("/new", isLoggedIn, listingController.renderNewForm);
 
 /* ===================== CREATE LISTING ===================== */
+/* 🔐 LOGIN REQUIRED + MULTI IMAGE UPLOAD */
 router.post(
   "/",
   isLoggedIn,
@@ -35,6 +39,7 @@ router.get("/search", wrapAsync(listingController.search));
 router.get("/:id", wrapAsync(listingController.showListing));
 
 /* ===================== EDIT LISTING ===================== */
+/* 🔐 LOGIN + OWNER CHECK */
 router.get(
   "/:id/edit",
   isLoggedIn,
@@ -43,6 +48,7 @@ router.get(
 );
 
 /* ===================== UPDATE LISTING ===================== */
+/* 🔐 LOGIN + OWNER + MULTI IMAGE */
 router.put(
   "/:id",
   isLoggedIn,
@@ -52,6 +58,7 @@ router.put(
 );
 
 /* ===================== DELETE LISTING ===================== */
+/* 🔐 LOGIN + OWNER */
 router.delete(
   "/:id",
   isLoggedIn,
