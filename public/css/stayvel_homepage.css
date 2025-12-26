@@ -1,0 +1,303 @@
+/* ===============================
+   DOZZY STYLE FILTER BAR (INDEX)
+================================ */
+
+.filters-main {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 20px;
+  border-bottom: 1px solid #eee;
+  background: #fff;
+}
+
+/* LEFT FILTER BUTTONS */
+#filters {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* SINGLE FILTER BUTTON */
+.filter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 90px;
+  padding: 8px 10px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: #555;
+}
+
+.filter img {
+  width: 24px;
+  height: 24px;
+  margin-bottom: 4px;
+}
+
+.filter p {
+  font-size: 12px;
+  font-weight: 500;
+  margin: 0;
+  white-space: nowrap;
+}
+
+/* HOVER EFFECT */
+.filter:hover {
+  background: #f7f7f7;
+  color: #000;
+}
+
+/* ACTIVE (OPTIONAL – FUTURE USE) */
+.filter.active {
+  border-bottom: 2px solid #000;
+  color: #000;
+}
+
+/* REMOVE OLD SLIDER BUTTONS IF ANY */
+.left_img_button,
+.right_img_button {
+  display: none !important;
+}
+
+/* MOBILE RESPONSIVE */
+@media (max-width: 768px) {
+  .filters-main {
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .filters-main::-webkit-scrollbar {
+    display: none;
+  }
+
+  #filters {
+    flex-wrap: nowrap;
+  }
+}
+
+
+/* ===== DOZZY STYLE FILTER ALIGNMENT FIX ===== */
+
+/* Parent row jisme categories + filters hain */
+.filters-main,
+.category-bar,
+.stayvel-category-row {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;   /* RIGHT se hata ke LEFT */
+  gap: 28px;
+  flex-wrap: wrap;
+}
+
+/* Farmhouses & Stays + Hotel & Resorts */
+.category-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+}
+
+/* Filter buttons container */
+.dozzy-filters {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-left: 24px; /* categories ke baad spacing */
+}
+
+/* Individual filter buttons */
+.dozzy-filters .filter-btn,
+.dozzy-filters button {
+  background: #fff;
+  border: 1px solid #ddd;
+  padding: 8px 16px;
+  border-radius: 999px;
+  font-size: 14px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.dozzy-filters .filter-btn:hover {
+  border-color: #000;
+}
+
+/* Clear filter button */
+.clear-filter {
+  background: transparent;
+  border: none;
+  font-size: 14px;
+  cursor: pointer;
+  color: #333;
+}
+
+/* Remove right side push */
+.dozzy-filters,
+.filter-dd {
+  position: relative;
+}
+
+/* Dropdown menu position */
+.filter-menu {
+  position: absolute;
+  top: 42px;
+  left: 0;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 6px 0;
+  display: none;
+  z-index: 1000;
+  min-width: 160px;
+}
+
+.filter-dd.active .filter-menu {
+  display: block;
+}
+
+.filter-menu li {
+  padding: 8px 14px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.filter-menu li:hover {
+  background: #f5f5f5;
+}
+/* ================= FILTER BAR FIX ================= */
+
+.filters-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 20px 0 10px 0;
+  padding-left: 8px;
+  flex-wrap: wrap;
+}
+
+/* individual buttons */
+.filters-wrapper .filter-dd button,
+.filters-wrapper .clear-filter {
+  padding: 8px 16px;
+  border-radius: 999px;
+  border: 1px solid #ddd;
+  background: #fff;
+  font-size: 14px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+/* dropdown list */
+.filters-wrapper .filter-dd {
+  position: relative;
+}
+
+.filters-wrapper .filter-dd ul {
+  position: absolute;
+  top: 110%;
+  left: 0;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+  list-style: none;
+  padding: 8px 0;
+  min-width: 160px;
+  display: none;
+  z-index: 1000;
+}
+
+.filters-wrapper .filter-dd ul li {
+  padding: 8px 14px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.filters-wrapper .filter-dd ul li:hover {
+  background: #f5f5f5;
+}
+
+/* clear filter */
+.filters-wrapper .clear-filter {
+  border: none;
+  background: transparent;
+  font-weight: 500;
+}
+
+/* active dropdown */
+.filters-wrapper .filter-dd.active ul {
+  display: block;
+}
+/* ===== FILTER CONTAINER FIX ===== */
+.filters-main {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* LEFT align */
+  gap: 18px;
+  margin-top: 20px;
+}
+
+/* Icons row (Farmhouses & Stays / Hotel & Resorts) */
+#filters {
+  display: flex;
+  gap: 40px;
+  align-items: center;
+  margin-left: 0;
+}
+
+/* Dozzy style buttons row */
+.dozzy-index-filters {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+/* Filter buttons */
+.dozzy-index-filters .filter-btn {
+  padding: 8px 16px;
+  border-radius: 999px;
+  border: 1px solid #ddd;
+  background: #fff;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+/* Clear all filters */
+.clear-filter {
+  background: none;
+  border: none;
+  font-size: 14px;
+  cursor: pointer;
+  color: #333;
+}
+
+/* Dropdown menu fix */
+.filter-dd {
+  position: relative;
+}
+
+.filter-menu {
+  position: absolute;
+  top: 42px;
+  left: 0;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  list-style: none;
+  padding: 8px 0;
+  min-width: 160px;
+  display: none;
+  z-index: 999;
+}
+
+.filter-menu li {
+  padding: 8px 14px;
+  cursor: pointer;
+}
+
+.filter-menu li:hover {
+  background: #f5f5f5;
+}

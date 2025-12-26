@@ -16,18 +16,14 @@
         <div>
           <img src="/Icon/navbar-icon.png" id="png-img-bar">
 
-<% if (typeof currUser !== "undefined" && currUser.profileImage) { %>
-  <img
-    src="<%= currUser.profileImage %>"
-    alt="Profile"
-    id="png-img-user"
-    style="border-radius: 50%; object-fit: cover;"
-  >
-<% } else { %>
-  <img src="/Icon/navbar-icon-user.png" alt="User" id="png-img-user">
-<% } %>
+          <% if (typeof currUser !=="undefined" && currUser.profileImage) { %>
+            <img src="<%= currUser.profileImage %>" alt="Profile" id="png-img-user"
+              style="border-radius: 50%; object-fit: cover;">
+            <% } else { %>
+              <img src="/Icon/navbar-icon-user.png" alt="User" id="png-img-user">
+              <% } %>
 
-<img src="/Icon/navbar-icon-cross.png" id="png-img-cross">
+                <img src="/Icon/navbar-icon-cross.png" id="png-img-cross">
 
         </div>
       </div>
@@ -41,7 +37,10 @@
             <% if (typeof currUser !=='undefined' ) { %>
               <a href="/logout">LogOut</a>
               <% } %>
+
+              
       </div>
+      
     </div>
     <div id="nav-search-hide">
       <div class="nav-search nav-hover">
@@ -52,5 +51,8 @@
       </div>
     </div>
   </div>
+
+
+  
 </nav>
 <script src="/js/navbar.js"></script>

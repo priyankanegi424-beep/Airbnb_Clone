@@ -196,3 +196,343 @@
         display: block;
     }
 }
+
+
+/* <-  new style for price , buttons  -> */
+
+/* ===============================
+   CATEGORY BUTTONS (LEFT SIDE)
+   Farmhouses & Stays / Hotel & Resorts
+   =============================== */
+
+#filters {
+  display: flex;
+  gap: 40px;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+#filters a {
+  text-decoration: none;
+  color: #111;
+}
+
+#filters .filter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  padding-bottom: 6px;
+  position: relative;
+}
+
+/* underline on hover */
+#filters .filter::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0%;
+  height: 3px;
+  background-color: #000;
+  border-radius: 2px;
+  transition: width 0.25s ease;
+}
+
+#filters .filter:hover::after {
+  width: 100%;
+}
+
+/* active look (optional future use) */
+#filters .filter.active::after {
+  width: 100%;
+}
+
+#filters .filter p {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+
+/* ===============================
+   DOZZY STYLE FILTER BUTTONS
+   All BHK / All Prices / Sort / Clear
+   =============================== */
+
+.dozzy-index-filters {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 18px;
+}
+
+/* common pill button */
+.filter-btn,
+.clear-filter {
+  background: #fff;
+  border: 1px solid #ddd;
+  padding: 8px 16px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+/* hover effect */
+.filter-btn:hover,
+.clear-filter:hover {
+  border-color: #000;
+}
+
+/* active (clicked) state */
+.filter-btn.active {
+  border: 2px solid #000;
+  padding: 7px 15px;
+}
+
+/* Clear filter same look as others */
+.clear-filter {
+  color: #111;
+}
+
+
+/* ===============================
+   DROPDOWN MENU
+   =============================== */
+
+.filter-dd {
+  position: relative;
+}
+
+.filter-menu {
+  position: absolute;
+  top: 110%;
+  left: 0;
+  min-width: 160px;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 6px 0;
+  list-style: none;
+  display: none;
+  z-index: 1000;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+}
+
+.filter-menu li {
+  padding: 10px 14px;
+  font-size: 14px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.filter-menu li:hover {
+  background: #f5f5f5;
+}
+
+/* show dropdown (JS will toggle this class) */
+.filter-dd.open .filter-menu {
+  display: block;
+}
+.filter-dd {
+  position: relative;
+}
+
+.filter-menu {
+  display: none;
+  position: absolute;
+  top: 110%;
+  left: 0;
+  min-width: 160px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+  padding: 6px 0;
+  z-index: 1000;
+}
+
+.filter-menu li {
+  list-style: none;
+  padding: 10px 14px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.filter-menu li:hover {
+  background: #f5f5f5;
+}
+.filter-menu {
+  display: none;
+  position: absolute;
+  top: 110%;
+  left: 0;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+  padding: 8px 0;
+  min-width: 160px;
+  z-index: 999;
+}
+
+.filter-menu.show {
+  display: block;
+}
+
+.filter-menu li {
+  list-style: none;
+  padding: 10px 14px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.filter-menu li:hover {
+  background: #f5f5f5;
+}
+/* ===== DOZZY DROPDOWN FIX ===== */
+
+.filters-main {
+    overflow: visible !important;
+}
+
+#filters {
+    overflow: visible !important;
+}
+
+/* Right side buttons */
+.dozzy-index-filters {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-left: auto; /* PUSH TO RIGHT */
+    position: relative;
+}
+
+/* Button style (same as navbar) */
+.filter-btn,
+.clear-filter {
+    background: #fff;
+    border: 1px solid #ddd;
+    padding: 8px 14px;
+    border-radius: 999px;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+/* REMOVE underline on Clear All Filters */
+.clear-filter {
+    text-decoration: none !important;
+}
+.clear-filter:hover {
+    text-decoration: none !important;
+    border-color: #000;
+}
+
+/* Dropdown container */
+.filter-dd {
+    position: relative;
+}
+
+/* Dropdown menu */
+.filter-menu {
+    position: absolute;
+    top: 120%;
+    left: 0;
+    min-width: 160px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    list-style: none;
+    padding: 8px 0;
+    display: none;
+    z-index: 9999; /* MOST IMPORTANT */
+}
+
+/* Show dropdown */
+.filter-dd.active .filter-menu {
+    display: block;
+}
+
+/* Dropdown items */
+.filter-menu li {
+    padding: 10px 16px;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.filter-menu li:hover {
+    background: #f5f5f5;
+}
+
+
+
+/* ================= MOBILE FILTER FIX ================= */
+@media (max-width: 768px) {
+
+  /* Hide desktop inline filters */
+  .dozzy-index-filters {
+    display: none !important;
+  }
+
+  /* Mobile filter panel */
+  .mobile-filter-panel {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 85%;
+    max-width: 320px;
+    height: 100vh;
+    background: #fff;
+    z-index: 9999;
+    padding: 20px;
+    box-shadow: -4px 0 15px rgba(0,0,0,0.15);
+    transition: right 0.3s ease;
+    overflow-y: auto;
+  }
+
+  .mobile-filter-panel.active {
+    right: 0;
+  }
+
+  .mobile-filter-panel h4 {
+    margin-bottom: 15px;
+    font-size: 18px;
+  }
+
+  .mobile-filter-panel .filter-dd,
+  .mobile-filter-panel .clear-filter {
+    margin-bottom: 15px;
+    width: 100%;
+  }
+
+  .mobile-filter-panel button {
+    width: 100%;
+    text-align: left;
+    padding: 12px 14px;
+    border-radius: 12px;
+    border: 1px solid #ddd;
+    background: #fff;
+    font-weight: 500;
+  }
+
+  .mobile-filter-panel ul {
+    display: none;
+    margin-top: 10px;
+    padding-left: 0;
+  }
+
+  .mobile-filter-panel ul li {
+    list-style: none;
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+  }
+
+  .mobile-filter-panel ul li:last-child {
+    border-bottom: none;
+  }
+
+}

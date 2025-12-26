@@ -39,15 +39,64 @@
                 </div>
             </a>
 
+
+            <!-- ================= DOZZY STYLE FILTERS (INDEX.EJS) ================= -->
+
+<div class="dozzy-index-filters">
+
+  <!-- BHK -->
+  <div class="filter-dd">
+    <button type="button" class="filter-btn" id="bhkBtn">All BHK</button>
+    <ul class="filter-menu" id="bhkMenu">
+      <li data-bhk="1">1 BHK</li>
+      <li data-bhk="2">2 BHK</li>
+      <li data-bhk="3">3 BHK</li>
+      <li data-bhk="4">4 BHK</li>
+      <li data-bhk="5">5 BHK</li>
+      <li data-bhk="6">6 BHK</li>
+      <li data-bhk="7">7 BHK</li>
+    </ul>
+  </div>
+
+  <!-- PRICE -->
+  <div class="filter-dd">
+    <button type="button" class="filter-btn" id="priceBtn">All Prices</button>
+    <ul class="filter-menu" id="priceMenu">
+      <li data-price="6000-8000">₹6k – ₹8k</li>
+      <li data-price="8000-10000">₹8k – ₹10k</li>
+      <li data-price="10000-12000">₹10k – ₹12k</li>
+      <li data-price="12000-14000">₹12k – ₹14k</li>
+    </ul>
+  </div>
+
+  <!-- SORT -->
+  <div class="filter-dd">
+    <button type="button" class="filter-btn" id="sortBtn">Sort</button>
+    <ul class="filter-menu" id="sortMenu">
+      <li data-sort="low">Low to High</li>
+      <li data-sort="high">High to Low</li>
+    </ul>
+  </div>
+
+  <!-- CLEAR -->
+  <button type="button" class="clear-filter" id="clearFilters">
+    Clear All Filters ✖
+  </button>
+
+</div>
+
+
         </div>
 
+        
+
         <!-- FILTER ICON (KEEP THIS) -->
-        <div class="tax-toggle tax-filter-icon filterIcon me-2 ms-2" onclick="filterClick()">
+        <!-- <div class="tax-toggle tax-filter-icon filterIcon me-2 ms-2" onclick="filterClick()">
             <div class="form-check form-switch form-check-reverse pe-1" style="cursor:pointer;">
                 <i class="fa-solid fa-sliders" id="filter-icon"></i>
                 <label class="form-check-label" style="cursor:pointer;">Filters</label>
             </div>
-        </div>
+        </div> -->
 
         <!-- DISPLAY TOTAL BEFORE TAXES (COMMENTED, NOT REMOVED) -->
         <!--
@@ -112,7 +161,14 @@
     </a>
     <% } %>
         </div>
+
+
+
+        
         <script defer src="/js/filter.js"></script>
+        <script src="/js/navbar-filter.js"></script>
+
+
         <script>
             // let heartR = document.querySelectorAll(".heart-r")
             // let heartB = document.querySelectorAll(".heart-b")
